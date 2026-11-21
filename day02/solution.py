@@ -3,9 +3,9 @@ class OrderNotFoundError(Exception):
 
 
 def lookup_order(orders, order_id):
-    if not isinstance(order_id, str) or not order_id:
+    if not isinstance(order_id, str) or not order_id or not order_id.strip():
         raise ValueError("order_id must be a non-empty string")
-    for order in orders:
+    for order in orders or []:
         if order.get("order_id") == order_id:
             return order
     raise OrderNotFoundError(f"Order {order_id} not found")
